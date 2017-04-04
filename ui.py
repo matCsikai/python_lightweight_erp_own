@@ -43,7 +43,12 @@ def print_result(result, label):
 # @list_options: list of strings - the options in the menu
 # @exit_message: string - the last option with (0) (example: "Back to main menu")
 def print_menu(title, list_options, exit_message):
-
+    #print('Main menu:\n(1) Store manager\n(2) Human resources manager\n(3) Inventory manager\n(4) Accounting manager\n (5) Selling manager\n (6) Customer relationship management (CRM)\n (0) Exit program')
+    print(title)
+    for index, menu_objects in enumerate(list_options, 1):
+        print(index, menu_objects)
+    #print(enumerate(list_options))
+    print('0', exit_message)
     # your code
 
     pass
@@ -56,7 +61,8 @@ def print_menu(title, list_options, exit_message):
 # @inputs: list of string - list of the received values from the user
 def get_inputs(list_labels, title):
     inputs = []
-
+    print(title)
+    inputs.append(input(list_labels))
     # your code
 
     return inputs

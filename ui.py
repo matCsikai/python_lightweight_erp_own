@@ -72,9 +72,9 @@ def print_menu(title, list_options, exit_message):
     #print('Main menu:\n(1) Store manager\n(2) Human resources manager\n(3) Inventory manager\n(4) Accounting manager\n (5) Selling manager\n (6) Customer relationship management (CRM)\n (0) Exit program')
     print(title)
     for index, menu_objects in enumerate(list_options, 1):
-        print(index, menu_objects)
+        print('({0}) {1}'.format(index, menu_objects))
     #print(enumerate(list_options))
-    print('0', exit_message)
+    print('(0)', exit_message)
     # your code
 
     pass

@@ -26,7 +26,31 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 def start_module():
 
     # you code
-
+    options = ["Show table",
+               "Add store item",
+               "Remove item",
+               "Update item",
+               "Counts by manufacturers",
+               "Average by manufacturer"]
+    ui.print_menu("Store department", options, "Return to main menu")
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(data_manager.get_table_from_file("store/games.csv"))
+    elif option == "2":
+        hr.start_module()
+    elif option == "3":
+        tool_manager.start_module()
+    elif option == "4":
+        accounting.start_module()
+    elif option == "5":
+        selling.start_module()
+    elif option == "6":
+        crm.start_module()
+    elif option == "0":
+        sys.exit(0)
+    else:
+        raise KeyError("There is no such option.")
     pass
 
 
@@ -36,7 +60,7 @@ def start_module():
 def show_table(table):
 
     # your code
-
+    print(table)
     pass
 
 

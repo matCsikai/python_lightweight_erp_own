@@ -38,7 +38,7 @@ def start_module():
     if option == "1":
         show_table(data_manager.get_table_from_file("store/games.csv"))
     elif option == "2":
-        hr.start_module()
+        add(data_manager.get_table_from_file("store/games.csv"))
     elif option == "3":
         tool_manager.start_module()
     elif option == "4":
@@ -58,19 +58,37 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
+    title_list = ["ID", "Name", "Manufacturer", "price (dollar)", "in_stock"]
     # your code
-    print(table)
-    pass
+    ui.print_table(table, title_list)
+    start_module()
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
 # @table: list of lists
 def add(table):
-
-    # your code
-
+    title_list = ["Name", "Manufacturer", "price (dollar)", "in_stock"]
+    type_list = [str, str, int, int]
+    new_row = []
+    new_row.append(common.generate_random(table))
+    for expected_type, question in enumerate(title_list):
+        input_type = False
+        while input_type is False:
+            new_item = (input("Please add {}?: ".format(question)))
+            if type_list[expected_type] != str:
+                try:
+                    new_item = type_list[expected_type](new_item)
+                except:
+                    continue
+                else:
+                    new_row.append(str(new_item))
+                    input_type = True
+            else:
+                new_row.append(str(new_item))
+                input_type = True
+    table.append(new_row)
+    data_manager.write_table_to_file("store/games.csv", table)
     return table
 
 

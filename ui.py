@@ -14,8 +14,34 @@
 def print_table(table, title_list):
 
     # your code
+    columns_max_length = [0] * len(title_list)
+    table.insert(0, title_list)
+    for row in table:
+        counter_columns = 0
+        while counter_columns <= len(row) - 1:
+            if len(row[counter_columns]) > columns_max_length[counter_columns]:
+                if len(row[counter_columns]) % 2 != 0:
+                    columns_max_length[counter_columns] = int(len(row[counter_columns]) + 1)
+                else:
+                    columns_max_length[counter_columns] = int(len(row[counter_columns]))
+            counter_columns += 1
+    table_lenght = 0
+    for lenghts in columns_max_length:
+        table_lenght = table_lenght + lenghts
+    for row in table:
+        print("-" * (table_lenght + len(columns_max_length) + 1))
+        counter_columns = 0
+        while counter_columns <= len(row) - 1:
+            space = " " * (columns_max_length[counter_columns] - len(row[counter_columns]))
+            print("|", space, row[counter_columns], end="", sep="")
+            counter_columns += 1
+        print("|")
+    print("-" * (table_lenght + len(columns_max_length) + 1))
 
-    pass
+
+
+
+
 
 
 # This function needs to print result of the special functions

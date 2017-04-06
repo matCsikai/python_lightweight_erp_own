@@ -1,6 +1,7 @@
 # implement commonly used functions here
 
 import random
+import ui
 
 '''abcdefghijklmnopqrstuvwxyz
 ABCDEFGHIJKLMNOPQRSTUVWXYZ

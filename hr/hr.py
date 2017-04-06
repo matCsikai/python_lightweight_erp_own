@@ -181,7 +181,7 @@ def get_oldest_person(table):
         if item == oldest_age:
             oldests.append(table[index][1])
     ui.print_result(oldests, 'The oldest person(s):')
-    return
+    return oldests
 
 
 # the question: Who is the closest to the average age ?
@@ -199,9 +199,10 @@ def get_persons_closest_to_average(table):
     close = 100
     for i in ages:
         if abs(i-average_age) < close:
-            close = i
+            close = abs(i-average_age)
+            result = i
     for index, item in enumerate(ages):
-        if item == close:
+        if item == result:
             closests.append(table[index][1])
     ui.print_result(closests, 'The person(s) closest to average age:')
-    return
+    return closests

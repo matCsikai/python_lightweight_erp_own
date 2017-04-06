@@ -99,7 +99,7 @@ def remove(table):
                 data_manager.write_table_to_file("accounting/items.csv", table)
                 found_input = True
         if found_input is False:
-            print("\nNot souch ID\n")
+            ui.print_error_message("\nNot souch ID\n")
             remove(table)
     return table
 
@@ -135,9 +135,7 @@ def update(table, id_):
                 elif option == "2":
                     type_list = [int]
                     day_update = ui.get_inputs(['Day '], "Add new day: ")
-                    print("ok {} ".format(day_update))
                     corrected_record = common.check_type(day_update, ['Day'], type_list)
-                    print(corrected_record)
                     for i, id in enumerate(id_list):
                         if id == id_:
                             table[i][2] = corrected_record[0]

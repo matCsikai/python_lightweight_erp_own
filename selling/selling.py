@@ -77,7 +77,7 @@ def add(table):
             new_input.insert(0, common.generate_random(table))
             table.append(new_input)
         else:
-            print("\nWrong input!\n")
+            ui.print_error_message("\nWrong input!\n")
             return table
     data_manager.write_table_to_file("selling/sellings.csv", table)
     return table
@@ -99,7 +99,7 @@ def remove(table):
                 data_manager.write_table_to_file("selling/sellings.csv", table)
                 found_input = True
         if found_input is False:
-            print("\nNot souch ID\n")
+            ui.print_error_message("\nNot souch ID\n")
             remove(table)
     return table
 
@@ -127,7 +127,7 @@ def update(table):
                 found_input = True
             row_counter += 1
         if found_input is False:
-            print("\nNot souch ID\n")
+            ui.print_error_message("\nNot souch ID\n")
             remove(table)
     return table
 

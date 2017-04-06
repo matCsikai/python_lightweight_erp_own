@@ -49,10 +49,9 @@ def print_table(table, title_list):
 # @result: string or list or dictionary - result of the special function
 # @label: string - label of the result
 def print_result(result, label):
-
-    # your code
-
-    pass
+    print(label)
+    print(result)
+    return
 
 
 # This function needs to generate outputs like this:
@@ -98,7 +97,5 @@ def get_inputs(list_labels, title):
 #
 # @message: string - the error message
 def print_error_message(message):
-
-    # your code
-
-    pass
+    print(message)
+    return

@@ -24,8 +24,6 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-
-    # you code
     options = ["Show table",
                "Add store item",
                "Remove item",

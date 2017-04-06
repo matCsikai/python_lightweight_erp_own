@@ -29,7 +29,6 @@ def generate_random(table):
 
 def input_func(title_list, type_list, table, title):
     new_row = []
-    new_row.append(generate_random(table))
     print(title)
     for expected_type, question in enumerate(title_list):
         input_type = False

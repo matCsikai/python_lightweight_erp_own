@@ -9,6 +9,7 @@
 
 # importing everything you need
 import os
+import main
 from importlib.machinery import SourceFileLoader
 current_file_path = os.path.dirname(os.path.abspath(__file__))
 # User interface module
@@ -32,26 +33,27 @@ def start_module():
                "Update item",
                "Counts by manufacturers",
                "Average by manufacturer"]
-    ui.print_menu("Store department", options, "Return to main menu")
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(data_manager.get_table_from_file("store/games.csv"))
-    elif option == "2":
-        add(data_manager.get_table_from_file("store/games.csv"))
-    elif option == "3":
-        remove(data_manager.get_table_from_file("store/games.csv"))
-    elif option == "4":
-        accounting.start_module()
-    elif option == "5":
-        selling.start_module()
-    elif option == "6":
-        crm.start_module()
-    elif option == "0":
-        main.main()
-    else:
-        raise KeyError("There is no such option.")
-    pass
+    while True:
+        ui.print_menu("Store department", options, "Return to main menu")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(data_manager.get_table_from_file("store/games.csv"))
+        elif option == "2":
+            add(data_manager.get_table_from_file("store/games.csv"))
+        elif option == "3":
+            remove(data_manager.get_table_from_file("store/games.csv"))
+        elif option == "4":
+            update(data_manager.get_table_from_file("store/games.csv"))
+        elif option == "5":
+            selling.start_module()
+        elif option == "6":
+            crm.start_module()
+        elif option == "0":
+            main.main()
+        else:
+            raise KeyError("There is no such option.")
+        pass
 
 
 # print the default table of records from the file
@@ -59,9 +61,8 @@ def start_module():
 # @table: list of lists
 def show_table(table):
     title_list = ["ID", "Name", "Manufacturer", "price (dollar)", "in_stock"]
-    # your code
     ui.print_table(table, title_list)
-    start_module()
+    return
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
@@ -72,6 +73,7 @@ def add(table):
     type_list = [str, str, int, int]
     new_input = common.input_func(title_list, type_list, table, "Add store item: \n")
     if new_input != "exit":
+        new_input.insert(0, common.generate_random(table))
         table.append(new_input)
     data_manager.write_table_to_file("store/games.csv", table)
     start_module()
@@ -85,16 +87,19 @@ def add(table):
 def remove(table):
     title_list = ["ID"]
     type_list = [str]
-    new_input = common.input_func(title_list, type_list, table, "Remove item \n")
+    new_input = common.input_func(title_list, type_list, table, "\nRemove item. \n")
+    found_input = False
     if new_input != "exit":
-        for ?????
-        table.remove(new_input)
-    data_manager.write_table_to_file("store/games.csv", table)
-    start_module()
+        for row in table:
+            if str(row[0]) == str(new_input[0]):
+                table.remove(row)
+                data_manager.write_table_to_file("store/games.csv", table)
+                found_input = True
+        if found_input is False:
+            print("\nNot souch ID\n")
+            remove(table)
     return table
-    # your code
 
-    return table
 
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -102,10 +107,26 @@ def remove(table):
 #
 # @table: list of lists
 # @id_: string
-def update(table, id_):
-
-    # your code
-
+def update(table):
+    title_list = ["ID"]
+    type_list = [str]
+    new_input = common.input_func(title_list, type_list, table, "\nUpdate item. \n")
+    found_input = False
+    if new_input != "exit":
+        title_list = ["Name", "Manufacturer", "price (dollar)", "in_stock"]
+        type_list = [str, str, int, int]
+        update_input = common.input_func(title_list, type_list, table, "Update store item: \n")
+        row_counter = 0
+        for row in table:
+            if str(row[0]) == str(new_input[0]):
+                table[row_counter] = update_input
+                table[row_counter].insert(0, str(new_input[0]))
+                data_manager.write_table_to_file("store/games.csv", table)
+                found_input = True
+            row_counter += 1
+        if found_input is False:
+            print("\nNot souch ID\n")
+            remove(table)
     return table
 
 

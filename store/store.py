@@ -165,4 +165,4 @@ def get_average_by_manufacturer(table):
                 all_amount += int(stock[4])
     average_amount = all_amount / len(list_of_stock)
     ui.print_result(average_amount, "\nAverage amount of games in stock of a given manufacturer:\n")
-    return table
+    return average_amount

@@ -136,10 +136,11 @@ def update(table):
 # the question: How many different kinds of game are available of each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [count] }
 def get_counts_by_manufacturers(table):
+    manufacturer_dict = {}
+    for row in table:
+        if manufacturer not in manufacturer_list:
+            manufacturer_list.append(manufacturer) 
 
-    # your code
-
-    pass
 
 
 # the question: What is the average amount of games in stock of a given manufacturer?

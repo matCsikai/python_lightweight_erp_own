@@ -208,7 +208,6 @@ def which_year_max(table):
             year = result_list[i-1]
     ui.print_result(year, "The year of the highest profit: ")
     return
-    
 
 
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]

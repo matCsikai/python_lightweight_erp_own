@@ -48,3 +48,23 @@ def input_func(title_list, type_list, table, title):
                 new_row.append(str(new_item))
                 input_type = True
     return new_row
+
+
+def check_type(items, titles, types_of_items):
+    result = items
+    for index, item in enumerate(items):
+            input_type = False
+            while input_type is False:
+                if types_of_items[index] != str:
+                    try:
+                        item = types_of_items[index](item)
+                    except:
+                        ui.print_error_message('The given {} is not applicable!'.format(titles[index]))
+                        item = ui.get_inputs(['Add again: '], '')[0]
+                        continue
+                    else:
+                        result[index] = str(item)
+                        input_type = True
+                else:
+                    input_type = True
+    return result

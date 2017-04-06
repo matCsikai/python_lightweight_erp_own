@@ -112,7 +112,42 @@ def update(table, id_):
     while id_ not in id_list:
         ui.print_error_message('The given ID is not in table!')
         id_ = ui.get_inputs(['Please enter the ID of the item to update: '], '')[0]
+    
 
+    while True:
+        options = ['Name ', 'Year of birth ']
+        ui.print_menu("", options, "Return to HR menu")
+        while True:
+            try:
+                inputs = ui.get_inputs(["Please enter the number of the data to update or 0 to return to HR menu: "], "")
+                option = inputs[0]
+                if option == "1":
+                    type_list = [str]
+                    name_update = ui.get_inputs(['Name '], "Add new name: ")
+                    corrected_record = common.check_type(name_update, ['Name'], type_list)
+                    for i, id in enumerate(id_list):
+                        if id == id_:
+                            table[i][1] = corrected_record[0]
+                            data_manager.write_table_to_file("hr/persons.csv", table)
+                            ui.print_result(table[i], 'Record updated: ')
+                elif option == "2":
+                    type_list = [int]
+                    year_update = ui.get_inputs(['Year '], "Add new year of birth: ")
+                    corrected_record = common.check_type(year_update, ['Year'], type_list)
+                    for i, id in enumerate(id_list):
+                        if id == id_:
+                            table[i][2] = corrected_record[0]
+                            data_manager.write_table_to_file("hr/persons.csv", table)
+                            ui.print_result(table[i], 'Record updated: ')
+                elif option == "0":
+                    return
+                else:
+                    raise KeyError("There is no such option.")
+            except KeyError as err:
+                ui.print_error_message(err)
+
+
+    '''
     title_list = ['Name ', 'Year of birth ']
     type_list = [str, int]
     get_update = ui.get_inputs(title_list, "Add data for update:")
@@ -123,6 +158,8 @@ def update(table, id_):
             for record_index, item in enumerate(corrected_record):
                 table[id_index][record_index + 1] = item
     data_manager.write_table_to_file("hr/persons.csv", table)
+    '''
+
     return table
 
 

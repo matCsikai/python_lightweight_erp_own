@@ -32,7 +32,7 @@ def start_module():
                "Remove item",
                "Update item",
                "What is the id of the item that sold for the lowest price ?",
-               "Average by manufacturer"]
+               "Items are sold between two given dates ? (from_date < birth_date < to_date)"]
     while True:
         ui.print_menu("Sales:", options, "Return to main menu")
         inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -48,7 +48,13 @@ def start_module():
         elif option == "5":
             get_lowest_price_item_id(data_manager.get_table_from_file("selling/sellings.csv"))
         elif option == "6":
-            get_items_sold_between(data_manager.get_table_from_file("selling/sellings.csv"))
+            month_from = ui.get_inputs(['Month_from '], '')[0]
+            day_from = ui.get_inputs(['Day_from '], '')[0]
+            year_from = ui.get_inputs(['Year_from '], '')[0]
+            month_to = ui.get_inputs(['Month_to '], '')[0]
+            day_to = ui.get_inputs(['Day_to '], '')[0]
+            year_to = ui.get_inputs(['Year_to '], '')[0]
+            get_items_sold_between(data_manager.get_table_from_file("selling/sellings.csv"), month_from, day_from, year_from, month_to, day_to, year_to)
         elif option == "0":
             return
         else:
@@ -161,7 +167,9 @@ def get_lowest_price_item_id(table):
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
-    
-    # your code
-
-    pass
+    result = []
+    for row in table:
+        if int(row[5]) >= int(year_from) and int(row[3]) >= int(month_from) and int(row[4]) >= int(day_from) and int(row[5]) <= int(year_to) and int(row[3]) <= int(month_to) and int(row[4]) <= int(day_to):
+            result.append(row)
+    ui.print_result(result, "Items sold between the given dates: ")
+    return result

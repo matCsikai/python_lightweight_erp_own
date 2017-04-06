@@ -169,4 +169,4 @@ def get_average_durability_by_manufacturers(table):
     for item in range(0, len(result_list), 3):
         final_result[result_list[item]] = result_list[item + 1] / result_list[item + 2]
     ui.print_result(final_result, "The average durabilities are: ")
-    return
+    return final_result

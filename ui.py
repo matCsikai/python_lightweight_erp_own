@@ -51,6 +51,7 @@ def print_table(table, title_list):
 def print_result(result, label):
     print(label)
     print(result)
+    print()
     return
 
 
@@ -97,4 +98,5 @@ def get_inputs(list_labels, title):
 # @message: string - the error message
 def print_error_message(message):
     print(message)
+    print()
     return

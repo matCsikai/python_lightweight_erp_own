@@ -157,10 +157,7 @@ def get_persons_closest_to_average(table):
         age += (2017-int(i[2]))
         ages.append(2017-int(i[2]))
         number_of_persons += 1
-    print(ages)
-    print(number_of_persons)
     average_age = age/number_of_persons
-    print(average_age)
     closests = []
     close = 100
     for i in ages:
@@ -169,6 +166,5 @@ def get_persons_closest_to_average(table):
     for index, item in enumerate(ages):
         if item == close:
             closests.append(table[index][1])
-    print(closests)
     ui.print_result(closests, 'The person(s) closest to average age:')
     return

@@ -9,7 +9,6 @@
 
 # importing everything you need
 import os
-import main
 from importlib.machinery import SourceFileLoader
 current_file_path = os.path.dirname(os.path.abspath(__file__))
 # User interface module
@@ -46,11 +45,11 @@ def start_module():
         elif option == "4":
             update(data_manager.get_table_from_file("store/games.csv"))
         elif option == "5":
-            selling.start_module()
+            get_counts_by_manufacturers(data_manager.get_table_from_file("store/games.csv"))
         elif option == "6":
-            crm.start_module()
+            get_average_by_manufacturer(data_manager.get_table_from_file("store/games.csv"))
         elif option == "0":
-            main.main()
+            return
         else:
             raise KeyError("There is no such option.")
         pass
@@ -138,15 +137,34 @@ def update(table):
 def get_counts_by_manufacturers(table):
     manufacturer_dict = {}
     for row in table:
-        if manufacturer not in manufacturer_list:
-            manufacturer_list.append(manufacturer) 
-
+        if row[2] in manufacturer_dict:
+            manufacturer_dict[row[2]] += 1
+        else:
+            manufacturer_dict[row[2]] = 1
+    ui.print_result(manufacturer_dict, "\nDifferent kinds of game are available of each manufacturer:\n")
+    return table
 
 
 # the question: What is the average amount of games in stock of a given manufacturer?
 # return type: number
-def get_average_by_manufacturer(table, manufacturer):
-
-    # your code
-
-    pass
+def get_average_by_manufacturer(table):
+    title_list = ["Manufacturer"]
+    type_list = [str]
+    list_of_uniqe_manufacturer = []
+    counter = 1
+    for manufacturer in table:
+        if manufacturer[2] not in list_of_uniqe_manufacturer:
+            list_of_uniqe_manufacturer.append(manufacturer[2])
+            print(counter, manufacturer[2])
+            counter += 1
+    new_input = common.input_func(title_list, type_list, table, "\nAverage by manufacturer \n")
+    list_of_stock = []
+    all_amount = 0
+    if new_input != "exit":
+        for stock in table:
+            if stock[2] == list_of_uniqe_manufacturer[int(new_input[0]) - 1]:
+                list_of_stock.append(stock[4])
+                all_amount += int(stock[4])
+    average_amount = all_amount / len(list_of_stock)
+    ui.print_result(average_amount, "\nAverage amount of games in stock of a given manufacturer:\n")
+    return table

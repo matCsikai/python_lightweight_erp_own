@@ -205,7 +205,7 @@ def which_year_max(table):
             max_profit = result_list[i]
             year = result_list[i-1]
     ui.print_result(year, "The year of the highest profit: ")
-    return
+    return int(year)
 
 
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
@@ -222,6 +222,6 @@ def avg_amount(table, year):
                 income -= int(row[5])
     if counter == 0:
         ui.print_error_message("There was no profit in {} year".format(year))
-        return
+        return None
     ui.print_result(income/counter, "The average profit in {}:".format(year))
-    return
+    return income/counter

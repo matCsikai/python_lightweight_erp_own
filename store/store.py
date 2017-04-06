@@ -40,7 +40,7 @@ def start_module():
     elif option == "2":
         add(data_manager.get_table_from_file("store/games.csv"))
     elif option == "3":
-        tool_manager.start_module()
+        remove(data_manager.get_table_from_file("store/games.csv"))
     elif option == "4":
         accounting.start_module()
     elif option == "5":
@@ -48,7 +48,7 @@ def start_module():
     elif option == "6":
         crm.start_module()
     elif option == "0":
-        sys.exit(0)
+        main.main()
     else:
         raise KeyError("There is no such option.")
     pass
@@ -70,25 +70,11 @@ def show_table(table):
 def add(table):
     title_list = ["Name", "Manufacturer", "price (dollar)", "in_stock"]
     type_list = [str, str, int, int]
-    new_row = []
-    new_row.append(common.generate_random(table))
-    for expected_type, question in enumerate(title_list):
-        input_type = False
-        while input_type is False:
-            new_item = (input("Please add {}?: ".format(question)))
-            if type_list[expected_type] != str:
-                try:
-                    new_item = type_list[expected_type](new_item)
-                except:
-                    continue
-                else:
-                    new_row.append(str(new_item))
-                    input_type = True
-            else:
-                new_row.append(str(new_item))
-                input_type = True
-    table.append(new_row)
+    new_input = common.input_func(title_list, type_list, table, "Add store item: \n")
+    if new_input != "exit":
+        table.append(new_input)
     data_manager.write_table_to_file("store/games.csv", table)
+    start_module()
     return table
 
 
@@ -96,8 +82,16 @@ def add(table):
 #
 # @table: list of lists
 # @id_: string
-def remove(table, id_):
-
+def remove(table):
+    title_list = ["ID"]
+    type_list = [str]
+    new_input = common.input_func(title_list, type_list, table, "Remove item \n")
+    if new_input != "exit":
+        for ?????
+        table.remove(new_input)
+    data_manager.write_table_to_file("store/games.csv", table)
+    start_module()
+    return table
     # your code
 
     return table

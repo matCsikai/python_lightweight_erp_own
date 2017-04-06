@@ -37,7 +37,7 @@ def print_table(table, title_list):
             counter_columns += 1
         print("|")
     print("-" * (table_lenght + len(columns_max_length) + 1))
-
+    del table[0]
 
 
 
